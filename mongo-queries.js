@@ -127,17 +127,125 @@
 // {$unset: {content: ""}}
 // )
 
+// 23. 
 
+// db.notes.find(
+//     {
+//         updatedAt: {
+//             $lte: new Date('Jan 01 2018')
+//         }
+//     }
+// ).count();
+// db.notes.updateMany(
+//     {
+//         updatedAt: {
+//             $lte: new Date('Jan 01 2018')
+//         }
+//     },
+//     {
+//         $unset: {
+//             title: ''
+//         }
+//     }
+// );
 
+// 24. 
+// db.notes.deleteOne(
+//     {
+//         _id: ObjectId("000000000000000000000017")
+//     }
+// );
 
+// 25. updatedAt field which is less than or equal Jan 01 2018
+// db.notes.find(
+//     {
+//         updatedAt: {
+//             $lte: new Date('Jan 01 2018')
+//         }
+//     }
+// ).count();
+// db.notes.deleteMany(
+//     {
+//         updatedAt: {
+//             $lte: new Date('Jan 01 2018')
+//         }
+//     }
+// );
 
+// 26.remove the documents that have an createdAt date that is greater than Jan 01 2018 and contain the string 'dogs' in the title
+// db.notes.find(
+//     {
+//         createdAt: {
+//             $gt: new Date('Jan 01 2018')
+//         },
+//         title: {
+//             $regex: /dogs/gi
+//         }
+//     }
+// ).count();
+// db.notes.deleteMany(
+//     {
+//         createdAt: {
+//             $gt: new Date('Jan 01 2018')
+//         },
+//         title: {
+//             $regex: /dogs/gi
+//         }
+//     }
+// );
 
+// 27. display all documents which do not have a title field
+// db.notes.updateOne(
+//     {},
+//     {
+//         $unset: {
+//             title: ''
+//         }
+//     }
+// );
+// db.notes.find(
+//     {
+//         title: {
+//             $exists: false
+//         }
+//     }
+// ).pretty();
 
+// 28. remove all the documents from the collection notes which contain the string 'cat' in the title but not the string 'read'.
+// db.notes.insertOne(
+//     {
+//         title: 'cat'
+//     }
+// );
+// db.notes.find(
+//     {
+//         title: {
+//             $regex: /cat/gi,
+//             $not: /read/gi
+//         }
+//     }
+// ).count();
+// db.notes.deleteMany(
+//     {
+//         title: {
+//             $regex: /cat/gi,
+//             $not: /read/gi
+//         }
+//     }
+// );
 
-
-
-
-
-
-
-//
+// 29. display all the documentsthat have a title field which does not contain the string 'dogs' and does contain a title field.
+db.notes.insertOne(
+    {
+        title: 'dogs'
+    }
+);
+db.notes.find(
+    {
+        title: {
+             $not: /dogs/gi,
+             $exists: true,         
+        }
+    }
+).pretty();
+db.notes.find().count();
