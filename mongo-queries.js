@@ -47,3 +47,32 @@
 //         createdAt: 1
 //     }
 // ).pretty();
+
+// 11. updatedAt is greater than or equal to Jan 01 2018 but less than or equal to now
+// db.notes.find(
+//     {
+//         updatedAt: {
+//             $gte: new Date('Jan 01 2018'),
+//             $lte: new Date(Date.now())
+//         }
+//     },
+//     {
+//         title: 1,
+//         updatedAt: 1,
+//         _id: 0
+//     }
+// ).pretty();
+
+// 12. display all notes createdAt less than or equal to now
+// db.notes.find(
+//     {
+//         createdAt: {
+//             $lte: new Date(Date.now())
+//         }
+//     },
+//     {
+//         title: 1,
+//         createdAt: 1,
+//         _id: 0
+//     }
+// ).pretty();
